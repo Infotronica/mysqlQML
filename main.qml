@@ -19,64 +19,73 @@ ApplicationWindow {
     property string urlFolder: ""
     property string urlWS: ""
 
-    Image {
-        anchors.fill: parent
-        source: "img_background/82291866_2586218914949191_3246048982811541504_o.jpg"
-        fillMode: Image.PreserveAspectFit
-    }
-
-    Rectangle {
-        anchors.fill: parent
-        color: "white"
-        opacity: 0.80
-    }
-
     ListModel {
         id: listaModel
     }
 
     Component {
         id: listaDelegate
-        Item {
-            width: 450
-            height: 20
 
-            Row {
-                spacing: -1
-                Rectangle {
-                    width: mainWindow.width*0.10;
-                    height: 20;
-                    color: "transparent";
-                    border.color: "black";
-                    Text {
-                        text: "<b>N:</b> " + n
-                    }
+        RowLayout {
+            id: listaDelegate
+            spacing: -1
+
+            Item {
+                Layout.fillWidth: true
+            }
+
+            Label {
+                text: "<b>N:</b> " + n
+                Layout.preferredWidth: mainWindow.width*0.05
+                height: 20
+
+                background: Rectangle {
+                    color: "white"
+                    border.color: "black"
+                    opacity: 0.70
                 }
-                Rectangle {
-                    width: mainWindow.width*0.90;
-                    height: 20;
-                    color: "transparent";
-                    border.color: "black";
-                    Text {
-                        text: "<b>Texto:</b> " + texto
-                    }
+            }
+
+            Label {
+                text: "<b>Texto:</b> " + texto
+                Layout.preferredWidth: mainWindow.width*0.50
+                height: 20
+
+                background: Rectangle {
+                    color: "white"
+                    border.color: "black"
+                    opacity: 0.70
                 }
+            }
+
+            Item {
+                Layout.fillWidth: true
             }
         }
     }
 
-    ColumnLayout { // contenedor para objetos en columna
+    ColumnLayout {
         anchors.fill: parent
 
-        ListView {
-            id: listView
+        Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            model: listaModel
-            delegate: listaDelegate
-            focus: true
-            highlight: highlight
-            highlightFollowsCurrentItem: false
+
+            Image {
+                anchors.fill: parent
+                source: "img_background/82291866_2586218914949191_3246048982811541504_o.jpg"
+                fillMode: Image.PreserveAspectFit
+            }
+
+            ListView {
+                id: listView
+                anchors.fill: parent
+                model: listaModel
+                delegate: listaDelegate
+                focus: true
+                highlight: highlight
+                highlightFollowsCurrentItem: false
+            }
         }
 
         RowLayout {
@@ -111,20 +120,20 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        archivoWS="webservice.php";
-        urlBase="http://127.0.0.1";
-        folderWS="webservice";
-        bdMain="database_names";
-        usrBD="root";
-        pwdBD="";
+        archivoWS="webservice.php"
+        urlBase="http://127.0.0.1"
+        folderWS="webservice"
+        bdMain="database_names"
+        usrBD="root"
+        pwdBD=""
 
         /*
             urlFolder = "http://localhost/webservice/"
             urlWS = "http://localhost/webservice/webservice.php"
          */
 
-        urlFolder=urlBase+"/"+folderWS+"/";
-        urlWS=urlFolder+archivoWS;
+        urlFolder=urlBase+"/"+folderWS+"/"
+        urlWS=urlFolder+archivoWS
 
         localFunctions.setWS(urlWS)
         localFunctions.setBD(bdMain)
