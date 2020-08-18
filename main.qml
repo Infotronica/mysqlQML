@@ -19,6 +19,18 @@ ApplicationWindow {
     property string urlFolder: ""
     property string urlWS: ""
 
+    Image {
+        anchors.fill: parent
+        source: "img_background/82291866_2586218914949191_3246048982811541504_o.jpg"
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Rectangle {
+        anchors.fill: parent
+        color: "white"
+        opacity: 0.80
+    }
+
     ListModel {
         id: listaModel
     }
@@ -120,7 +132,8 @@ ApplicationWindow {
         localFunctions.setPWD(pwdBD)
     }
 
-    function doSQLQueryJS() {
+    function doSQLQueryJS()
+    {
         var xmlhttp,params,sql,jsonArray,i
 
         xmlhttp = new XMLHttpRequest()
@@ -158,7 +171,8 @@ ApplicationWindow {
         xmlhttp.send(params)
     }
 
-    function doSQLQueryCPP() {
+    function doSQLQueryCPP()
+    {
         var sql,str,jsonArray,i
 
         sql="select * from `list names`"
